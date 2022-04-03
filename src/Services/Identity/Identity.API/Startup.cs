@@ -121,7 +121,7 @@ namespace Microsoft.eShopOnContainers.Services.Identity.API
 
             app.UseStaticFiles();
 
-            // Make work identity server redirections in Edge and lastest versions of browers. WARN: Not valid in a production environment.
+            // Make work identity server redirections in Edge and lastest versions of browsers. WARN: Not valid in a production environment.
             app.Use(async (context, next) =>
             {
                 context.Response.Headers.Add("Content-Security-Policy", "script-src 'unsafe-inline'");
@@ -133,8 +133,8 @@ namespace Microsoft.eShopOnContainers.Services.Identity.API
             app.UseIdentityServer();
 
             // Fix a problem with chrome. Chrome enabled a new feature "Cookies without SameSite must be secure", 
-            // the coockies shold be expided from https, but in eShop, the internal comunicacion in aks and docker compose is http.
-            // To avoid this problem, the policy of cookies shold be in Lax mode.
+            // the cookies should be expired from https, but in eShop, the internal communication in aks and docker compose is http.
+            // To avoid this problem, the policy of cookies should be in Lax mode.
             app.UseCookiePolicy(new CookiePolicyOptions { MinimumSameSitePolicy = AspNetCore.Http.SameSiteMode.Lax });
             app.UseRouting();
                         
